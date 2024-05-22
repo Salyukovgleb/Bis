@@ -1,0 +1,86 @@
+body {
+    background-color: #000; /* Черный фон */
+    color: #fff; /* Белый текст */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    margin-bottom: 30px;
+    background-color: #000; /* Черный фон */
+    border-bottom: 2px солид #fff; /* Белая нижняя граница */
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    height: 40px; /* Высота логотипа */
+    margin-right: 10px;
+}
+
+.nav-link {
+    color: #fff !важно; /* Белый текст для ссылок в навигации */
+    transition: color 0.3s;
+    margin: 0 15px; /* Отступы между ссылками */
+    font-size: 1.1em; /* Увеличенный размер шрифта */
+    position: relative; /* Для псевдоэлементов */
+}
+
+.nav-link:before, .nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #fff;
+    transition: все 0.3s;
+}
+
+.nav-link:before {
+    transform: translateX(-50%);
+}
+
+.nav-link:hover:before, .nav-link:hover:after {
+    width: 100%;
+    left: 0;
+    transform: translateX(0);
+}
+
+.container {
+    text-align: центр;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.lead {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+#map {
+    width: 100%;
+    height: 300px;
+    border-radius: 30px; /* Более закругленные углы */
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.mt-4, .mt-5 {
+    margin-top: 4rem !важно;
+}
+
+/* Добавлено для круглой метки */
+.ymaps-2-1-79-image {
+    border-radius: 50%;
+}

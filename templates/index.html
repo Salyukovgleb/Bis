@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIS Company</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <style>
+        /* Стиль для карты */
+        #map {
+            width: 100%;
+            height: 300px;
+            border-radius: 30px; /* Более закругленные углы */
+            overflow: hidden;
+        }
+
+        /* Стиль для круглой метки */
+        .ymaps-2-1-79-image {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='logo/bis_logo.png') }}" alt="BIS Logo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Каталог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Наши проекты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Как с нами связаться</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container text-center text-white mt-5">
+        <h1>Добро пожаловать в BIS Company</h1>
+        <p>Мы рады приветствовать вас на нашем сайте. Ознакомьтесь с нашими проектами и каталогом услуг.</p>
+        <p class="lead">Главный в решении проблем с настенными, напольными и потолочными покрытиями.</p>
+
+        <div class="mt-5">
+            <h3>Наш адрес</h3>
+            <div id="map"></div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Контакты</h3>
+            <p>+998 99 523 39 99</p>
+            <p>+998 94 096 13 31</p>
+            <p>+998 90 347 12 21</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=cf4edede-f81a-4f0e-a0fd-c913e60a4518"></script>
+    <script>
+        ymaps.ready(init);
+        function init() {
+            var myMap = new ymaps.Map("map", {
+                center: [41.3136, 69.2245], // Координаты адреса
+                zoom: 15
+            });
+
+            var myPlacemark = new ymaps.Placemark([41.3136, 69.2245], {
+                balloonContentHeader: '<strong>BIS Company</strong>',
+                balloonContentBody: 'Улица Джаркурганская, дом 22, Tashkent, Uzbekistan',
+            }, {
+                iconLayout: 'default#image',
+                iconImageHref: '{{ url_for('static', filename='logo/bis_logo.png') }}',
+                iconImageSize: [42, 42], // Размер иконки
+                iconImageOffset: [-21, -21], // Смещение иконки
+                iconShape: {
+                    type: 'Circle',
+                    coordinates: [21, 21],
+                    radius: 21
+                }
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+        }
+    </script>
+</body>
+</html>

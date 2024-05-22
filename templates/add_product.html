@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить продукт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #ffffff;
+            text-align: center;
+        }
+        form {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b0b0b0;
+        }
+        input[type="text"],
+        select,
+        textarea,
+        input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #333333;
+            border-radius: 4px;
+            background-color: #2b2b2b;
+            color: #ffffff;
+            transition: background-color 0.3s;
+        }
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus,
+        input[type="file"]:focus {
+            background-color: #333333;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .product-list {
+            margin-top: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+        .product-item {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-item img {
+            max-height: 100px;
+            margin-right: 10px;
+        }
+        .product-item div {
+            flex-grow: 1;
+        }
+        .product-item button {
+            background-color: #ff0000;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-left: 10px;
+        }
+        .product-item button:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+        .product-item .edit-button {
+            background-color: #007bff;
+            margin-left: 0;
+        }
+        .product-item .edit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добавить новый продукт</h1>
+    <form action="/add_product" method="post" enctype="multipart/form-data">
+        <label for="category">Категория:</label>
+        <select name="category" id="category">
+            <option value="ceramic_tile">Керамическая плитка</option>
+            <option value="custom_furniture">Индивидуальная мебель</option>
+            <option value="sanitary_ware">Санитарные изделия</option>
+            <option value="renovation_materials">Материалы для ремонта</option>
+            <option value="industrial_chemicals">Промышленные химикаты</option>
+            <option value="tools">Инструменты</option>
+        </select><br>
+
+        <label for="product_name">Название продукта:</label>
+        <input type="text" id="product_name" name="product_name"><br>
+
+        <label for="product_type">Тип продукта:</label>
+        <input type="text" id="product_type" name="product_type"><br>
+
+        <label for="size">Размер:</label>
+        <input type="text" id="size" name="size"><br>
+
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description"></textarea><br>
+
+        <label for="price">Цена:</label>
+        <input type="text" id="price" name="price"><br>
+
+        <label for="photo">Фото:</label>
+        <input type="file" id="photo" name="photo"><br>
+
+        <input type="submit" value="Добавить продукт">
+    </form>
+
+    <div class="product-list">
+        {% for product in products %}
+        <div class="product-item">
+            {% if product.photo %}
+            <img src="{{ url_for('static', filename=product.photo) }}" alt="{{ product.product_name }}">
+            {% endif %}
+            <div>
+                <h3>{{ product.product_name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>Цена: {{ product.price }}</p>
+            </div>
+            <button class="edit-button" onclick="location.href='/edit_product/{{ product.id }}'">Редактировать</button>
+            <button onclick="location.href='/delete_product/{{ product.id }}'">Удалить</button>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

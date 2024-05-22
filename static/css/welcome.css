@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000; /* Черный фон */
+    color: #fff; /* Белый текст */
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.logo-container {
+    animation: rotate 3s ease-in-out; /* Добавляем анимацию к контейнеру логотипа */
+    max-width: 100%;
+    margin-bottom: 20px; /* Отступ снизу для логотипа */
+}
+
+.logo {
+    width: 100%; /* Устанавливаем ширину логотипа */
+    max-width: 400px; /* Максимальный размер логотипа */
+    height: auto; 
+    border: none; /* Убираем обводку */
+    box-shadow: none; /* Убираем тень */
+    border-radius: 50%; /* Закругляем логотип */
+}
+
+.custom-btn {
+    animation: fadeIn 2s ease-in-out;
+    background-color: #000; /* Черный фон кнопки */
+    color: #fff; /* Белый текст кнопки */
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: 2px solid #fff; /* Белая обводка кнопки */
+    border-radius: 50px; /* Добавляем закругленные углы */
+    transition: background-color 0.3s, transform 0.3s; /* Добавляем плавный переход */
+    margin-top: 30px; /* Опускаем кнопку на 30 пикселей */
+}
+
+.custom-btn:hover {
+    background-color: #fff; /* Белый фон кнопки при наведении */
+    color: #000; /* Черный текст кнопки при наведении */
+    transform: translateY(-2px); /* Легкое поднятие кнопки при наведении */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
